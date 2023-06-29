@@ -1,0 +1,112 @@
+/* button  */
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #333;
+}
+
+.subject {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    font-size: 0.7rem;
+    color: white;
+    cursor: pointer;
+    padding: 0.35em 1em;
+    /* padding: 5%; */
+    border-radius: 20%;
+    background: none;
+    font-family: "Raleway", sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.2rem;
+    align-items: center;
+    margin: 8%;
+    white-space: normal;
+}
+
+
+div#pres .selected {
+    background-color: rgb(43, 255, 0);
+}
+
+div#notpres .selected {
+    background-color: red;
+}
+
+/* //nav */
+.topnav {
+    background-color: #57c4e3;
+    color: #333;
+    text-align: center;
+}
+
+.text {
+    padding: 5%;
+    font-size: 2.5rem;
+    text-align: center;
+    font-family: 'Acme', sans-serif;
+}
+/* //date  */
+#currdate {
+    background:none;
+    padding: 15px;
+    font-family: "Roboto Mono", monospace;
+    color: #ffffff;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    text-align: center;
+    /* width: 50%; */
+}
+
+.currdate{
+    text-align : center;
+
+}
+
+p {
+    font-family: 'Satisfy', cursive;
+    text-align: center;
+    font-size: x-large;
+    color: #ffffff;
+}
+
+/* Create two equal columns that floats next to each other */
+
+
+/* Clear floats after the columns */
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 5%;
+}
+#pres{
+    display: flex;
+    flex-direction: column;
+    padding-left: 7%;
+}
+#notpres{
+    display: flex;
+    flex-direction: column;
+    padding-right: 7%;
+}
+.subbut {
+    color: #ffffff;
+    font-family: 'Acme', sans-serif;
+    background:none;
+    padding: 15px;
+    text-align: center;
+    font-size: x-large;
+    width: 40%;
+    margin-bottom : 7%;
+}
