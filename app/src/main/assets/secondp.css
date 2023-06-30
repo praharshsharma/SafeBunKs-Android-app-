@@ -110,3 +110,7 @@ p {
     width: 40%;
     margin-bottom : 7%;
 }
+
+.hide{
+    display: none;
+}

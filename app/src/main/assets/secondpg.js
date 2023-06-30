@@ -7,45 +7,65 @@ currDate.value = today;
 let myarr=[];
 let detailedDataArr = [];
 
-window.onload = function(){
-    let data = Android.load_data();
-    let detailedData = Android.load_detailed_data();
-    let detailedDataAr = [];
-    if(detailedData)
-    {
-        detailedDataAr = JSON.parse(detailedData);
-        detailedDataArr = detailedDataAr;
+ window.onload = function(){
+     let data = Android.load_data();
+     let detailedData = Android.load_detailed_data();
+     let detailedDataAr = [];
+     if(detailedData)
+     {
+         detailedDataAr = JSON.parse(detailedData);
+         detailedDataArr = detailedDataAr;
 
-        //document.getElementById("tp").append(JSON.stringify(detailedDataArr));
-    }
+         //document.getElementById("tp").append(JSON.stringify(detailedDataArr));
+     }
 
-    if(data){
-        get_data(data);
-    }
-}
+     if(data){
+         get_data(data);
+     }
+ }
 
 let allbtns = [];
 let get_data = async (d) => {
     //data = d;
-    let data = []
-    data = JSON.parse(d);
-    myarr=data;
+     let data = []
+     data = JSON.parse(d);
+     myarr=data;
     for (let i = 0; i < data.length; i++) {
+        var box = document.createElement("div");
+        box.classList.add("box");
         var subcard = document.createElement("button");
         subcard.innerHTML = data[i].name;
         let classname = data[i].name.replaceAll(' ','');
         subcard.setAttribute("class", `${classname}`);
         subcard.classList.add("subject");
-        pres.appendChild(subcard);
+        subcard.classList.add("present");
+        var inp = document.createElement("input");
+        inp.setAttribute("type","number");
+        inp.setAttribute("id",`pres${classname}`);
+        inp.setAttribute("placeholder" , 1);
+        inp.classList.add("hide");
+        box.appendChild(subcard);
+        box.appendChild(inp);
+        pres.appendChild(box);
     }
 
     for (let i = 0; i < data.length; i++) {
+        var box = document.createElement("div");
+        box.classList.add("box");
         var subcard = document.createElement("button");
         subcard.innerHTML = data[i].name;
         let classname = data[i].name.replaceAll(' ','');
         subcard.setAttribute("class", `${classname}`);
         subcard.classList.add("subject");
-        notpres.appendChild(subcard);
+        subcard.classList.add("notpresent");
+        var inp = document.createElement("input");
+        inp.setAttribute("type","number");
+        inp.setAttribute("id",`notpres${classname}`);
+        inp.setAttribute("placeholder" , 1);
+        inp.classList.add("hide");
+        box.appendChild(subcard);
+        box.appendChild(inp);
+        notpres.appendChild(box);
     }
 
     //allbtns = document.getElementsByClassName("subject");
@@ -56,25 +76,20 @@ let get_data = async (d) => {
     allbtns.forEach((currElement) => {
         var classofcurr = currElement.classList[0];
         currElement.addEventListener("click", () => {
-            var selectsubbtn = document.querySelectorAll(`.${classofcurr}`);
-            for (let i = 0; i < 2; i++) {
-                if (currElement != selectsubbtn[i]) {
-                    selectsubbtn[i].classList.remove("selected");
-                }
-                if (currElement == selectsubbtn[i]) {
-                    if (selectsubbtn[i].classList.length > 2) {
-                        selectsubbtn[i].classList.remove("selected");
-                    }
-                    else {
-                        selectsubbtn[i].classList.add("selected");
-                    }
-                }
+            currElement.classList.toggle("selected");
+            if(currElement.classList.contains("present"))
+            {
+                document.getElementById(`pres${classofcurr}`).classList.toggle("hide");
+            }
+            else
+            {
+                document.getElementById(`notpres${classofcurr}`).classList.toggle("hide");
             }
         })
     })
 
 }
- //get_data(myarr);
+//get_data(myarr);
 
 //allbtns = document.getElementsByClassName("subject");
 
@@ -100,12 +115,15 @@ function modifyjson() {
         let pressub = pres.querySelectorAll(".subject");
         let notpressub = notpres.querySelectorAll(".subject");
         pressub.forEach((currElement) => {
-            if (currElement.classList.length == 3) {
+            if (currElement.classList.length > 3) {
                 for (let i = 0; i < myarr.length; i++) {
                     if (myarr[i].name.replaceAll(' ','') == currElement.classList[0]) {
-                        presarr.push(myarr[i].name);
-                        myarr[i].val[0]++;
-                        myarr[i].val[1]++;
+                        let val = document.getElementById(`pres${currElement.classList[0]}`).value;
+                        if(val==null) val = 1;
+                        for(let j=0;j<val;j++) presarr.push(myarr[i].name);
+                        let v = Number(val);
+                        myarr[i].val[0]+= v;
+                        myarr[i].val[1]+= v;
                     }
                 }
             }
@@ -113,11 +131,14 @@ function modifyjson() {
 
         notpressub.forEach((currElement) => {
 
-            if (currElement.classList.length == 3) {
+            if (currElement.classList.length > 3) {
                 for (let i = 0; i < myarr.length; i++) {
                     if (myarr[i].name.replaceAll(' ','') == currElement.classList[0]) {
-                        notpresarr.push(myarr[i].name);
-                        myarr[i].val[1]++;
+                        let val = document.getElementById(`notpres${currElement.classList[0]}`).value;
+                        if(val==null) val = 1;
+                        for(let j=0;j<val;j++) notpresarr.push(myarr[i].name);
+                        let v = Number(val);
+                        myarr[i].val[1]+= v;
                     }
                 }
             }
@@ -142,7 +163,7 @@ function modifyjson() {
             });
         }
 
-        //console.log(myarr);
+        console.log(myarr);
         Android.add_detailed_data(JSON.stringify(detailedDataArr));
         Android.add_data(JSON.stringify(myarr));
 

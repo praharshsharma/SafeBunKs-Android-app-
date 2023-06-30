@@ -32,9 +32,11 @@ function addingsub(){
 
     for(let i=1;i<x;i++){
         var subn = document.getElementById(`sub${i}`).value;
-        var obj={name:subn , val:[0,0]};
-
-        jsondata.push(obj);
+        if(subn != "")
+        {
+            var obj={name:subn , val:[0,0]};
+            jsondata.push(obj);
+        }
     }
     let result = Android.add_data(JSON.stringify(jsondata));
     x=1;
