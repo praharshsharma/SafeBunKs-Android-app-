@@ -2,17 +2,18 @@ let pres = document.getElementById("pres");
 let notpres = document.getElementById("notpres");
 let currDate = document.getElementById("currdate");
 var today = new Date().toISOString().split('T')[0];
+currDate.value = today;
 let row = document.getElementsByClassName("row");
 let msg = document.getElementById("msg");
 let submitbutton=document.getElementById("submitbutton");
-currDate.value = today;
 
+//let tp=document.getElementById("tp");
 let myarr = [];
 let detailedDataArr = [];
-// myarr = [{ name: "OOT", val: [4, 4] }, { name: "ojk", val: [3, 3] }, { name: "hghfty", val: [0, 1] }, { name: "DBMS LAB", val: [0, 3] }, { name: "poiuytrewq", val: [2, 2] }, { name: "QWERTYUIOP", val: [1, 1] }];
+//let my = [{ name: "OOT", val: [4, 4] }, { name: "ojk", val: [3, 3] }, { name: "hghfty", val: [0, 1] }, { name: "DBMS LAB", val: [0, 3] }, { name: "poiuytrewq", val: [2, 2] }, { name: "QWERTYUIOP", val: [1, 1] }];
 // detailedDataArr = [{ date: "2023-06-09", presarr: ["OOT", "ojk", "OOT"], notpresarr: ["hghfty", "DBMS LAB"] }, { date: "2023-06-16", presarr: ["OOT", "ojk", "poiuytrewq"], notpresarr: ["DBMS LAB"] }, { date: "2023-06-29", presarr: ["OOT", "ojk", "poiuytrewq", "QWERTYUIOP"], notpresarr: ["DBMS LAB"] }]
 
-window.onload=function(){
+window.onload=async function(){
     let data = Android.load_data();
     let detailedData = Android.load_detailed_data();
     let detailedDataAr = [];
@@ -26,7 +27,7 @@ window.onload=function(){
     if(data){
         let d=[];
         d=JSON.parse(data);
-        myarr=data;
+        myarr=d;
     }
 }
 
@@ -36,7 +37,7 @@ async function showifpresent() {
     let flag = 0;
     let present = [];
     let notpresent = [];
-    detailedDataArr.forEach((currElement) => {
+    detailedDataArr.forEach(async (currElement) => {
         if (currElement.date == currDate) {
             flag = 1;
             pres.innerHTML = "<p>Present</p>"; notpres.innerHTML = "<p>Absent</p>";
@@ -87,22 +88,25 @@ async function showifpresent() {
     }
 
     allbtns = document.querySelectorAll(".subject");
-    allbtns.forEach((currElement) => {
-        currElement.addEventListener("click", () => {
+    allbtns.forEach(async (currElement) => {
+        currElement.addEventListener("click", async () => {
             var classofcurr = currElement.classList[0];
             if(currElement.classList[2]=="selected"){
                 currElement.classList.remove("selected");
                 if(currElement.classList.length>2){ 
-                    console.log("to remove last elem");
+//                    console.log("to remove last elem");
                     currElement.classList.remove(currElement.classList[currElement.classList.length-1]);
                 }
             }
             else{
                 currElement.classList.add("selected");
             }
+//            for(int i=0;i<currElement.classList.length;i++){
+//                tp.append(i + " " + currElement.classList[i] + " ");
+//            }
             if (classofcurr[0] == 'n') {
                 let choices = document.querySelectorAll(".notpreschoices");
-                choices.forEach((currch) => {
+                choices.forEach(async (currch) => {
                     if (currch.classList[0] == classofcurr) {
                         if (currch.innerHTML != "") currch.innerHTML = "";
                         else {
@@ -120,7 +124,7 @@ async function showifpresent() {
             }
             else {
                 let choices = document.querySelectorAll(".preschoices");
-                choices.forEach((currch) => {
+                choices.forEach(async (currch) => {
                     if (currch.classList[0] == classofcurr) {
                         if (currch.innerHTML != "") currch.innerHTML = "";
                         else {
@@ -136,97 +140,133 @@ async function showifpresent() {
                     }
                 })
             }
-            console.log("line 83");
+//            for(let i=0;i<currElement.classList.length;i++){
+//                tp.append(currElement.classList[i]);
+//            }
+//            tp.append(currElement.classList[0]);
+//            tp.append("\n");
+//            console.log("line 83");
             submitbutton.setAttribute("onclick","modifydata()");
         })
     })
 }
 
-function modifydata(){
+async function modifydata(){
     let a = pres.querySelectorAll(".subject");
     let b = notpres.querySelectorAll(".subject");
     let newpres=[];
     let newnotpres = [];
-    a.forEach((currElement)=>{
-        if(currElement.classList.length==2) newpres.push(currElement.innerHTML);
+//    let data = Android.load_data();
+//    let d=[];
+//    d=JSON.parse(data);
+//    myarr=data;
+//    tp.append(d);
+//    tp.append("myarr.length\n");
+//    tp.append(myarr.length);
+//    tp.append("\n");
+//    tp.append(my);
+//        tp.append("\nmy.length\n");
+//        tp.append(my.length);
+//        tp.append("\n");
+//    tp.append(a);
+    a.forEach(async (currElement)=>{
+        if(currElement.classList.length==2) newpres.push(currElement.innerText);
         else{
-            myarr.forEach((curr)=>{
-                if(curr.name==currElement.innerHTML){
+//            tp.append("myarr.length\n");
+//            let myn = myarr.length;
+//            tp.append(myn);
+            for(let i=0;i<myarr.length;i++){
+//                tp.append("in else part a ")
+//                tp.append("\n");
+//                tp.append(currElement.innerText);
+                if(myarr[i].name.replaceAll(' ','')==currElement.innerText.replaceAll(' ','')){
                     if(currElement.classList[3]=="absent"){
-                        newnotpres.push(currElement.innerHTML);
-                        curr.val[0]--;
+                        newnotpres.push(currElement.innerText);
+                        myarr[i].val[0]--;
                     }
                     else if(currElement.classList[3]=="presnoclass"){
-                        curr.val[0]--;
-                        curr.val[1]--;
+                        myarr[i].val[0]--;
+                        myarr[i].val[1]--;
                     }
                 }
-            })
+            }
         }
     })
 
-    b.forEach((currElement)=>{
-        if(currElement.classList.length==2) newnotpres.push(currElement.innerHTML);
+    b.forEach(async (currElement)=>{
+        if(currElement.classList.length==2) newnotpres.push(currElement.innerText);
         else{
-            myarr.forEach((curr)=>{
-                if(curr.name==currElement.innerHTML){
+//            tp.append("in else part b ")
+            for(let i=0;i<myarr.length;i++){
+                if(myarr[i].name.replaceAll(' ','')==currElement.innerText.replaceAll(' ','')){
+//                    tp.append(currElement.innerText);
                     if(currElement.classList[3]=="present"){
-                        newpres.push(currElement.innerHTML);
-                        curr.val[0]++;
+//                        tp.append("in present ");
+                        newpres.push(currElement.innerText);
+                        myarr[i].val[0]++;
                     }
                     else if(currElement.classList[3]=="notpresnoclass"){
-                        curr.val[1]--;
+                        myarr[i].val[1]--;
                     }
                 }
-            })
+            }
         }
     })
 
-    console.log(myarr);
+//    console.log(myarr);
     detailedDataArr.forEach((currElement)=>{
         if(currElement.date==currDate){
             currElement.presarr=newpres;
             currElement.notpresarr=newnotpres;
         }
     })
-    console.log(detailedDataArr);
+//    console.log(detailedDataArr);
     Android.add_detailed_data(JSON.stringify(detailedDataArr));
     Android.add_data(JSON.stringify(myarr));
+//    tp.innerHTML+=(JSON.stringify(myarr));
+//    tp.innerHTML+=(JSON.stringify(detailedDataArr));
     location.replace("./index.html");
 }
 
-function present(classn){
+async function present(classn){
     allbtns = document.querySelectorAll(".subject");
-    allbtns.forEach((curr)=>{
+    allbtns.forEach(async (curr)=>{
         if(curr.classList[0]==classn){
             curr.classList.add("present");
         }
     })
 }
 
-function absent(classn){
+async function absent(classn){
     // console.log(classn);
     // console.log("in absent");
+
     allbtns = document.querySelectorAll(".subject");
-    allbtns.forEach((curr)=>{
+    allbtns.forEach(async (curr)=>{
         if(curr.classList[0]==classn){
             curr.classList.add("absent");
+//            tp.append("absent ")
+//            for(let i=0;i<curr.classList.length;i++){
+//                tp.append(curr.classList[i]);
+//            }
         }
+
     })
+
 }
 
-function presnoclass(classn){
+async function presnoclass(classn){
     allbtns = document.querySelectorAll(".subject");
-    allbtns.forEach((curr)=>{
+    allbtns.forEach(async (curr)=>{
         if(curr.classList[0]==classn){
             curr.classList.add("presnoclass");
         }
     })
 }
 
-function notpresnoclass(classn){
+async function notpresnoclass(classn){
     allbtns = document.querySelectorAll(".subject");
-    allbtns.forEach((curr)=>{
+    allbtns.forEach(async (curr)=>{
         if(curr.classList[0]==classn){
             curr.classList.add("notpresnoclass");
         }

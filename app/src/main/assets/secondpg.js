@@ -119,7 +119,7 @@ function modifyjson() {
                 for (let i = 0; i < myarr.length; i++) {
                     if (myarr[i].name.replaceAll(' ','') == currElement.classList[0]) {
                         let val = document.getElementById(`pres${currElement.classList[0]}`).value;
-                        if(val==null) val = 1;
+                        if(val=="") val = 1;
                         for(let j=0;j<val;j++) presarr.push(myarr[i].name);
                         let v = Number(val);
                         myarr[i].val[0]+= v;
@@ -135,7 +135,7 @@ function modifyjson() {
                 for (let i = 0; i < myarr.length; i++) {
                     if (myarr[i].name.replaceAll(' ','') == currElement.classList[0]) {
                         let val = document.getElementById(`notpres${currElement.classList[0]}`).value;
-                        if(val==null) val = 1;
+                        if(val=="") val = 1;
                         for(let j=0;j<val;j++) notpresarr.push(myarr[i].name);
                         let v = Number(val);
                         myarr[i].val[1]+= v;
