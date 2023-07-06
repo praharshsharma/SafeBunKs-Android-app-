@@ -5,7 +5,7 @@
 
 * {
     margin: 0;
-    padding: 0;
+    padding: 0; 
     box-sizing: border-box;
 }
 body{
@@ -13,22 +13,17 @@ body{
 }
 
 .subject {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    font-size: 0.7rem;
+    font-size: 1rem;
     color: white;
     cursor: pointer;
-    padding: 0.35em 1em;
-    /* padding: 5%; */
+    padding: 2.5%;
     border-radius: 20%;
     background: none;
     font-family: "Raleway", sans-serif;
-    font-weight: 900;
     letter-spacing: 0.2rem;
-    align-items: center;
-    margin: 8%;
-    white-space: normal;
+    font-weight: bold;
+    margin: 5%;
+    width: fit-content;
 }
 
 
@@ -40,11 +35,24 @@ div#notpres .selected {
     background-color: red;
 }
 
+#mainc{
+    position: relative;
+    top: 10vh;
+}
+
 /* //nav */
 .topnav {
+    position: fixed;
+    top: 0;
     background-color: #57c4e3;
     color: #333;
     text-align: center;
+    z-index: 1;
+    width: 100%;
+    height: 9vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .text {
@@ -78,27 +86,21 @@ p {
     font-size: x-large;
     color: #ffffff;
 }
-
-/* Create two equal columns that floats next to each other */
-
-
-/* Clear floats after the columns */
 .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
     padding-bottom: 5%;
 }
 #pres{
     display: flex;
     flex-direction: column;
-    padding-left: 7%;
+    justify-content: center;
+    align-items: center;
 }
 #notpres{
     display: flex;
     flex-direction: column;
-    padding-right: 7%;
+    margin-top: 15%;
+    justify-content: center;
+    align-items: center;
 }
 .subbut {
     color: #ffffff;
@@ -108,8 +110,49 @@ p {
     text-align: center;
     font-size: x-large;
     width: 40%;
-    margin-bottom : 7%;
+    margin-bottom : 30%;
 }
 .hide{
     display: none;
+}
+#footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    background-color: white;
+    height: 8vh;
+}
+
+
+.record{
+    font-family: 'Acme', sans-serif;
+    background: none;
+    text-align: center;
+    height: 100%;
+    border: none;
+    width: 100%;
+    border-right: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.btn{
+    border: none;
+    background: none;
+    color: black;
+
+}
+
+.click{
+    background-color: purple;
+}
+
+button{
+    background: none;
+    color: #ffffff;
+    padding: 2%;
+    margin: 2%;
 }

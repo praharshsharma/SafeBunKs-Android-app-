@@ -33,11 +33,7 @@ div#notpres .selected {
 }
 
 /* //nav */
-.topnav {
-    background-color: #57c4e3;
-    color: #333;
-    text-align: center;
-}
+
 
 .topnav {
     position: fixed;
