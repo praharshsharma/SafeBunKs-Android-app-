@@ -102,7 +102,7 @@ p {
     justify-content: center;
     align-items: center;
 }
-.subbut {
+#submitbutton {
     color: #ffffff;
     font-family: 'Acme', sans-serif;
     background:none;
@@ -110,7 +110,17 @@ p {
     text-align: center;
     font-size: x-large;
     width: 40%;
-    margin-bottom : 30%;
+    margin-bottom : 10%;
+}
+#deletebutton {
+    color: #ffffff;
+    font-family: 'Acme', sans-serif;
+    background:none;
+    padding: 15px;
+    text-align: center;
+    font-size: x-large;
+    width: 40%;
+    margin-bottom : 5%;
 }
 .hide{
     display: none;
@@ -155,4 +165,10 @@ button{
     color: #ffffff;
     padding: 2%;
     margin: 2%;
+}
+
+#cleard{
+    color: #ffffff;
+    font-size: 1rem;
+    margin-bottom : 40%;
 }

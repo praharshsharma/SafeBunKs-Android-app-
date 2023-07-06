@@ -6,27 +6,26 @@ currDate.value = today;
 let row = document.getElementsByClassName("row");
 let msg = document.getElementById("msg");
 let submitbutton = document.getElementById("submitbutton");
-
+let cleard = document.getElementById("cleard");
 let myarr = [];
 let detailedDataArr = [];
 // myarr = [{ name: "OOT", val: [4, 4] }, { name: "ojk", val: [3, 3] }, { name: "hghfty", val: [0, 1] }, { name: "DBMS LAB", val: [0, 3] }, { name: "poiuytrewq", val: [2, 2] }, { name: "QWERTYUIOP", val: [1, 1] }];
 // detailedDataArr = [{ date: "2023-07-06", presarr: ["OOT", "ojk", "OOT"], notpresarr: ["hghfty", "DBMS LAB"] }, { date: "2023-06-16", presarr: ["OOT", "ojk", "poiuytrewq"], notpresarr: ["DBMS LAB"] }, { date: "2023-06-29", presarr: ["OOT", "ojk", "poiuytrewq", "QWERTYUIOP"], notpresarr: ["DBMS LAB"] }]
 
-window.onload=async function(){
+window.onload = async function () {
     let data = Android.load_data();
     let detailedData = Android.load_detailed_data();
     let detailedDataAr = [];
-    if(detailedData)
-    {
+    if (detailedData) {
         detailedDataAr = JSON.parse(detailedData);
         detailedDataArr = detailedDataAr;
 
         //document.getElementById("tp").append(JSON.stringify(detailedDataArr));
     }
-    if(data){
-        let d=[];
-        d=JSON.parse(data);
-        myarr=d;
+    if (data) {
+        let d = [];
+        d = JSON.parse(data);
+        myarr = d;
     }
 }
 
@@ -98,7 +97,7 @@ async function showifpresent() {
             else {
                 currElement.classList.add("selected");
             }
-            
+
             if (classofcurr[0] == 'n') {
                 let choices = document.querySelectorAll(".notpreschoices");
                 choices.forEach(async (currch) => {
@@ -192,7 +191,7 @@ async function modifydata() {
     })
     Android.add_detailed_data(JSON.stringify(detailedDataArr));
     Android.add_data(JSON.stringify(myarr));
-    
+
     location.replace("./index.html");
 }
 
@@ -250,3 +249,35 @@ async function notpresnoclass(classn) {
 
 }
 
+
+async function deletebut() {
+    if (!cleard.innerHTML) {
+        cleard.innerHTML += "Are you Sure ?";
+        let yes = document.createElement("button");
+        yes.innerHTML = "Yes";
+        yes.setAttribute("id", "yes");
+        yes.setAttribute("onclick", "deletedata()");
+        cleard.appendChild(yes);
+        let no = document.createElement("button");
+        no.innerHTML = "No";
+        no.setAttribute("id", "no");
+        no.setAttribute("onclick", "no()");
+        cleard.appendChild(no);
+    }
+}
+
+async function deletedata() {
+    let yes = document.getElementById("yes");
+    yes.classList.add("click");
+    myarr = [];
+    detailedDataArr = [];
+    Android.add_detailed_data(JSON.stringify(detailedDataArr));
+    Android.add_data(JSON.stringify(myarr));
+    location.replace("./index.html");
+}
+
+function no() {
+    let no = document.getElementById("no");
+    no.classList.add("click");
+    cleard.innerHTML="";
+}
