@@ -27,10 +27,22 @@ body{
 }
 
 .text {
-    /* padding: 5%; */
+    padding: 5%;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-family: 'Acme', sans-serif;
+    color: white;
+}
+
+input[type="submit"]{
+    color: #ffffff;
+    font-family: 'Acme', sans-serif;
+    background:none;
+    padding: 10px;
+    text-align: center;
+    font-size: large;
+    width: 40%;
+    margin-bottom : 30%;
 }
 
 input[type="text"]{
@@ -48,7 +60,7 @@ input[type="text"]{
     color: white;
     /* border-color: #0080ff; */
     font-family: 'Satisfy', cursive;
-    margin-bottom: 30%;
+    margin-bottom: 10%;
 }
 
 /* .subnamelist{
@@ -59,7 +71,7 @@ input[type="text"]{
 .cards{
     display:inline-block;
     width: 43%;
-    background-color:#19e5a8;
+    background-color:#DFD7C8;
     margin: 3%;
 }
 .subtext{
