@@ -117,8 +117,8 @@ p {
     bottom: 0;
     width: 100%;
     display: flex;
-    background-color: white;
     height: 8vh;
+    background-color: #4169E1;
 }
 
 .record{
@@ -128,7 +128,7 @@ p {
     height: 100%;
     border: none;
     width: 100%;
-    border-right: 1px solid black;
+    border-right: 1px solid white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,7 +138,8 @@ p {
 .btn{
     border: none;
     background: none;
-
+    color:white;
+    font-weight: bold;
 }
 
 #mainc{
