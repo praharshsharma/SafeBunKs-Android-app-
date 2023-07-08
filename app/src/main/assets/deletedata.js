@@ -191,7 +191,7 @@ async function modifydata() {
     })
     Android.add_detailed_data(JSON.stringify(detailedDataArr));
     Android.add_data(JSON.stringify(myarr));
-
+    Android.displayToast("Attendance updated");
     location.replace("./index.html");
 }
 
@@ -273,6 +273,7 @@ async function deletedata() {
     detailedDataArr = [];
     Android.add_detailed_data(JSON.stringify(detailedDataArr));
     Android.add_data(JSON.stringify(myarr));
+    Android.displayToast("Data cleared");
     location.replace("./index.html");
 }
 

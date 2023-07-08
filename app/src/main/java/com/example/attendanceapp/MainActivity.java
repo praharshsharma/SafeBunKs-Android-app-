@@ -13,6 +13,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.content.Context;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             String ret = "";
 
             try {
-                InputStream inputStream = newContext.openFileInput("user.json");
+                InputStream inputStream = newContext.openFileInput("data.json");
 
                 if ( inputStream != null ) {
                     InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         @JavascriptInterface
         public String add_data (String json_string){
             try {
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(newContext.openFileOutput("user.json", Context.MODE_PRIVATE));
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(newContext.openFileOutput("data.json", Context.MODE_PRIVATE));
                 outputStreamWriter.write(json_string);
                 outputStreamWriter.close();
                 return "Success";
@@ -154,6 +155,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        @JavascriptInterface
+        public void displayToast(String msg)
+        {
+            Toast.makeText(getBaseContext(), msg, Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -169,10 +175,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        if(webView != null && webView.canGoBack()){
-            webView.goBack();
+        String t = "file:///android_asset/index.html";
+        if(webView != null && webView.canGoBack() && !t.equals(webView.getUrl())){
+            webView.loadUrl("file:///android_asset/index.html");
         }else{
-            super.onBackPressed();
+            finish();
         }
     }
 }

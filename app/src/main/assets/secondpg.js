@@ -166,6 +166,6 @@ function modifyjson() {
         console.log(myarr);
         Android.add_detailed_data(JSON.stringify(detailedDataArr));
         Android.add_data(JSON.stringify(myarr));
-
+        Android.displayToast("Attendance added");
         location.replace("./index.html")
 }

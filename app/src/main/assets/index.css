@@ -34,6 +34,7 @@ body{
     color: white;
 }
 
+
 input[type="submit"]{
     color: #ffffff;
     font-family: 'Acme', sans-serif;
@@ -162,8 +163,8 @@ svg{
     bottom: 0;
     width: 100%;
     display: flex;
-    background-color: white;
     height: 8vh;
+    background-color: #4169E1;
 }
 
 .record{
@@ -173,7 +174,7 @@ svg{
     height: 100%;
     border: none;
     width: 100%;
-    border-right: 1px solid black;
+    border-right: 1px solid white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -183,7 +184,8 @@ svg{
 .btn{
     border: none;
     background: none;
-
+    color:white;
+    font-weight: bold;
 }
 
 #mainc{
