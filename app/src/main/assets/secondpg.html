@@ -10,23 +10,34 @@
 </head>
 
 <body id="body">
-<div class="topnav">
-    <p class="text">ATTENDANCE APP</p>
-</div>
-<div class="currdate"><input type="date" id="currdate"></div><br>
-<div class="row">
+<center>
+    <div class="topnav">
+        <p class="text">ATTENDANCE APP</p>
+    </div>
+    <div id="mainc">
+        <div class="currdate"><input type="date" id="currdate"></div><br>
+        <div class="row">
 
 
-    <div id="pres">
-        <p>Present</p>
+            <div id="pres">
+                <p>Present</p>
+            </div>
+
+            <div id="notpres">
+                <p>Absent</p>
+            </div>
+
+        </div>
+        <button onclick="modifyjson()" class="subbut">Submit</button>
     </div>
 
-    <div id="notpres">
-        <p>Absent</p>
-    </div>
+    <footer id="footer">
+        <a id="anch" class="record"><button class="btn">Update Attendance</button></a>
+        <a href="detaileddata.html" class="record"><button class="btn"> Attendance Record</button></a>
+        <a href="deletedata.html" class="record"><button class="btn">Delete Attendance</button></a>
+    </footer>
 
-</div>
-<center><button onclick="modifyjson()" class="subbut">Submit</button></center>
+</center>
 </body>
 
 </html>

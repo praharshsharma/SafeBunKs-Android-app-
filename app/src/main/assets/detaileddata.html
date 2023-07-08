@@ -5,16 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script defer src="detaileddata.js"></script>
+    <link rel="stylesheet" href="detaileddata.css">
 </head>
 <body>
-<table id="table">
-    <tr>
-        <th>Date</th>
-        <th>Present</th>
-        <th>Absent</th>
-    </tr>
+<div class="topnav">
+    <p class="text">ATTENDANCE APP</p>
+</div>
+<div id="mainc">
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Present</th>
+            <th>Absent</th>
+        </tr>
+    </table>
+</div>
+<div id="mainc2">
+    <table id="table"></table>
+</div>
 
-</table>
-<div id="tp"></div>
+
+<footer id="footer">
+    <a href="secondpg.html" id="anch" class="record"><button class="btn">Update Attendance</button></a>
+    <a class="record"><button class="btn"> Attendance Record</button></a>
+    <a href="deletedata.html" class="record"><button class="btn">Delete Attendance</button></a>
+</footer>
 </body>
 </html>

@@ -2,31 +2,30 @@ let pres = document.getElementById("pres");
 let notpres = document.getElementById("notpres");
 let currDate = document.getElementById("currdate");
 var today = new Date().toISOString().split('T')[0];
+currDate.value = today;
 let row = document.getElementsByClassName("row");
 let msg = document.getElementById("msg");
-let submitbutton=document.getElementById("submitbutton");
-currDate.value = today;
-
+let submitbutton = document.getElementById("submitbutton");
+let cleard = document.getElementById("cleard");
 let myarr = [];
 let detailedDataArr = [];
 // myarr = [{ name: "OOT", val: [4, 4] }, { name: "ojk", val: [3, 3] }, { name: "hghfty", val: [0, 1] }, { name: "DBMS LAB", val: [0, 3] }, { name: "poiuytrewq", val: [2, 2] }, { name: "QWERTYUIOP", val: [1, 1] }];
-// detailedDataArr = [{ date: "2023-06-09", presarr: ["OOT", "ojk", "OOT"], notpresarr: ["hghfty", "DBMS LAB"] }, { date: "2023-06-16", presarr: ["OOT", "ojk", "poiuytrewq"], notpresarr: ["DBMS LAB"] }, { date: "2023-06-29", presarr: ["OOT", "ojk", "poiuytrewq", "QWERTYUIOP"], notpresarr: ["DBMS LAB"] }]
+// detailedDataArr = [{ date: "2023-07-06", presarr: ["OOT", "ojk", "OOT"], notpresarr: ["hghfty", "DBMS LAB"] }, { date: "2023-06-16", presarr: ["OOT", "ojk", "poiuytrewq"], notpresarr: ["DBMS LAB"] }, { date: "2023-06-29", presarr: ["OOT", "ojk", "poiuytrewq", "QWERTYUIOP"], notpresarr: ["DBMS LAB"] }]
 
-window.onload=function(){
+window.onload = async function () {
     let data = Android.load_data();
     let detailedData = Android.load_detailed_data();
     let detailedDataAr = [];
-    if(detailedData)
-    {
+    if (detailedData) {
         detailedDataAr = JSON.parse(detailedData);
         detailedDataArr = detailedDataAr;
 
         //document.getElementById("tp").append(JSON.stringify(detailedDataArr));
     }
-    if(data){
-        let d=[];
-        d=JSON.parse(data);
-        myarr=data;
+    if (data) {
+        let d = [];
+        d = JSON.parse(data);
+        myarr = d;
     }
 }
 
@@ -36,7 +35,7 @@ async function showifpresent() {
     let flag = 0;
     let present = [];
     let notpresent = [];
-    detailedDataArr.forEach((currElement) => {
+    detailedDataArr.forEach(async (currElement) => {
         if (currElement.date == currDate) {
             flag = 1;
             pres.innerHTML = "<p>Present</p>"; notpres.innerHTML = "<p>Absent</p>";
@@ -61,7 +60,6 @@ async function showifpresent() {
         var subcard = document.createElement("button");
         subcard.innerHTML = present[i];
         let classname = present[i].replaceAll(' ', '');
-        // subcard.setAttribute("id","pressec")        
         subcard.setAttribute("class", `pres${i}`);
         subcard.classList.add("subject");
         pres.appendChild(subcard);
@@ -87,31 +85,33 @@ async function showifpresent() {
     }
 
     allbtns = document.querySelectorAll(".subject");
-    allbtns.forEach((currElement) => {
-        currElement.addEventListener("click", () => {
+    allbtns.forEach(async (currElement) => {
+        currElement.addEventListener("click", async () => {
             var classofcurr = currElement.classList[0];
-            if(currElement.classList[2]=="selected"){
+            if (currElement.classList[2] == "selected") {
                 currElement.classList.remove("selected");
-                if(currElement.classList.length>2){ 
-                    console.log("to remove last elem");
-                    currElement.classList.remove(currElement.classList[currElement.classList.length-1]);
+                if (currElement.classList.length > 2) {
+                    currElement.classList.remove(currElement.classList[currElement.classList.length - 1]);
                 }
             }
-            else{
+            else {
                 currElement.classList.add("selected");
             }
+
             if (classofcurr[0] == 'n') {
                 let choices = document.querySelectorAll(".notpreschoices");
-                choices.forEach((currch) => {
+                choices.forEach(async (currch) => {
                     if (currch.classList[0] == classofcurr) {
                         if (currch.innerHTML != "") currch.innerHTML = "";
                         else {
                             var ifpresent = document.createElement("button");
                             ifpresent.innerHTML = "I was Present";
-                            ifpresent.setAttribute("onclick",`present('${classofcurr}')`);
+                            ifpresent.classList.add(`presbut${classofcurr}`);
+                            ifpresent.setAttribute("onclick", `present('${classofcurr}')`);
                             var noclass = document.createElement("button");
                             noclass.innerHTML = "The class did not happen."
-                            noclass.setAttribute("onclick",`notpresnoclass('${classofcurr}')`);
+                            noclass.classList.add(`noclassbut1${classofcurr}`);
+                            noclass.setAttribute("onclick", `notpresnoclass('${classofcurr}')`);
                             currch.appendChild(ifpresent);
                             currch.appendChild(noclass);
                         }
@@ -120,116 +120,164 @@ async function showifpresent() {
             }
             else {
                 let choices = document.querySelectorAll(".preschoices");
-                choices.forEach((currch) => {
+                choices.forEach(async (currch) => {
                     if (currch.classList[0] == classofcurr) {
                         if (currch.innerHTML != "") currch.innerHTML = "";
                         else {
                             var ifabsent = document.createElement("button");
                             ifabsent.innerHTML = "I was Absent";
-                            ifabsent.setAttribute("onclick",`absent('${classofcurr}')`);
+                            ifabsent.classList.add(`absebut${classofcurr}`);
+                            ifabsent.setAttribute("onclick", `absent('${classofcurr}')`);
                             var noclass = document.createElement("button");
                             noclass.innerHTML = "The class did not happen."
-                            noclass.setAttribute("onclick",`presnoclass('${classofcurr}')`);
+                            noclass.classList.add(`noclassbut2${classofcurr}`);
+                            noclass.setAttribute("onclick", `presnoclass('${classofcurr}')`);
                             currch.appendChild(ifabsent);
                             currch.appendChild(noclass);
                         }
                     }
                 })
             }
-            console.log("line 83");
-            submitbutton.setAttribute("onclick","modifydata()");
+            submitbutton.setAttribute("onclick", "modifydata()");
         })
     })
 }
 
-function modifydata(){
+async function modifydata() {
     let a = pres.querySelectorAll(".subject");
     let b = notpres.querySelectorAll(".subject");
-    let newpres=[];
+    let newpres = [];
     let newnotpres = [];
-    a.forEach((currElement)=>{
-        if(currElement.classList.length==2) newpres.push(currElement.innerHTML);
-        else{
-            myarr.forEach((curr)=>{
-                if(curr.name==currElement.innerHTML){
-                    if(currElement.classList[3]=="absent"){
-                        newnotpres.push(currElement.innerHTML);
-                        curr.val[0]--;
+    a.forEach(async (currElement) => {
+        if (currElement.classList.length == 2) newpres.push(currElement.innerText);
+        else {
+            for (let i = 0; i < myarr.length; i++) {
+                if (myarr[i].name.replaceAll(' ', '') == currElement.innerText.replaceAll(' ', '')) {
+                    if (currElement.classList[3] == "absent") {
+                        newnotpres.push(currElement.innerText);
+                        myarr[i].val[0]--;
                     }
-                    else if(currElement.classList[3]=="presnoclass"){
-                        curr.val[0]--;
-                        curr.val[1]--;
+                    else if (currElement.classList[3] == "presnoclass") {
+                        myarr[i].val[0]--;
+                        myarr[i].val[1]--;
                     }
                 }
-            })
+            }
         }
     })
 
-    b.forEach((currElement)=>{
-        if(currElement.classList.length==2) newnotpres.push(currElement.innerHTML);
-        else{
-            myarr.forEach((curr)=>{
-                if(curr.name==currElement.innerHTML){
-                    if(currElement.classList[3]=="present"){
-                        newpres.push(currElement.innerHTML);
-                        curr.val[0]++;
+    b.forEach(async (currElement) => {
+        if (currElement.classList.length == 2) newnotpres.push(currElement.innerText);
+        else {
+            for (let i = 0; i < myarr.length; i++) {
+                if (myarr[i].name.replaceAll(' ', '') == currElement.innerText.replaceAll(' ', '')) {
+                    if (currElement.classList[3] == "present") {
+                        newpres.push(currElement.innerText);
+                        myarr[i].val[0]++;
                     }
-                    else if(currElement.classList[3]=="notpresnoclass"){
-                        curr.val[1]--;
+                    else if (currElement.classList[3] == "notpresnoclass") {
+                        myarr[i].val[1]--;
                     }
                 }
-            })
+            }
         }
     })
 
-    console.log(myarr);
-    detailedDataArr.forEach((currElement)=>{
-        if(currElement.date==currDate){
-            currElement.presarr=newpres;
-            currElement.notpresarr=newnotpres;
+    detailedDataArr.forEach((currElement) => {
+        if (currElement.date == currDate) {
+            currElement.presarr = newpres;
+            currElement.notpresarr = newnotpres;
         }
     })
-    console.log(detailedDataArr);
+    Android.add_detailed_data(JSON.stringify(detailedDataArr));
+    Android.add_data(JSON.stringify(myarr));
+
+    location.replace("./index.html");
+}
+
+async function present(classn) {
+    allbtns = document.querySelectorAll(".subject");
+    allbtns.forEach(async (curr) => {
+        if (curr.classList[0] == classn) {
+            curr.classList.add("present");
+        }
+    })
+    let presbut = document.querySelectorAll(`.presbut${classn}`);
+    presbut[0].classList.toggle("click");
+    let noclassbut1 = document.querySelectorAll(`.noclassbut1${classn}`);
+    noclassbut1[0].classList.remove("click");
+}
+
+async function absent(classn) {
+    allbtns = document.querySelectorAll(".subject");
+    allbtns.forEach(async (curr) => {
+        if (curr.classList[0] == classn) {
+            curr.classList.add("absent");
+        }
+    })
+    let absebut = document.querySelectorAll(`.absebut${classn}`);
+    absebut[0].classList.toggle("click");
+    let noclassbut2 = document.querySelectorAll(`.noclassbut2${classn}`);
+    noclassbut2[0].classList.remove("click");
+
+}
+
+async function presnoclass(classn) {
+    allbtns = document.querySelectorAll(".subject");
+    allbtns.forEach(async (curr) => {
+        if (curr.classList[0] == classn) {
+            curr.classList.add("presnoclass");
+        }
+    })
+    let noclassbut2 = document.querySelectorAll(`.noclassbut2${classn}`);
+    noclassbut2[0].classList.toggle("click");
+    let absebut = document.querySelectorAll(`.absebut${classn}`);
+    absebut[0].classList.remove("click");
+}
+
+async function notpresnoclass(classn) {
+    allbtns = document.querySelectorAll(".subject");
+    allbtns.forEach(async (curr) => {
+        if (curr.classList[0] == classn) {
+            curr.classList.add("notpresnoclass");
+        }
+    })
+    let noclassbut1 = document.querySelectorAll(`.noclassbut1${classn}`);
+    noclassbut1[0].classList.toggle("click");
+    let presbut = document.querySelectorAll(`.presbut${classn}`);
+    presbut[0].classList.remove("click");
+
+}
+
+
+async function deletebut() {
+    if (!cleard.innerHTML) {
+        cleard.innerHTML += "Are you Sure ?";
+        let yes = document.createElement("button");
+        yes.innerHTML = "Yes";
+        yes.setAttribute("id", "yes");
+        yes.setAttribute("onclick", "deletedata()");
+        cleard.appendChild(yes);
+        let no = document.createElement("button");
+        no.innerHTML = "No";
+        no.setAttribute("id", "no");
+        no.setAttribute("onclick", "no()");
+        cleard.appendChild(no);
+    }
+}
+
+async function deletedata() {
+    let yes = document.getElementById("yes");
+    yes.classList.add("click");
+    myarr = [];
+    detailedDataArr = [];
     Android.add_detailed_data(JSON.stringify(detailedDataArr));
     Android.add_data(JSON.stringify(myarr));
     location.replace("./index.html");
 }
 
-function present(classn){
-    allbtns = document.querySelectorAll(".subject");
-    allbtns.forEach((curr)=>{
-        if(curr.classList[0]==classn){
-            curr.classList.add("present");
-        }
-    })
+function no() {
+    let no = document.getElementById("no");
+    no.classList.add("click");
+    cleard.innerHTML="";
 }
-
-function absent(classn){
-    // console.log(classn);
-    // console.log("in absent");
-    allbtns = document.querySelectorAll(".subject");
-    allbtns.forEach((curr)=>{
-        if(curr.classList[0]==classn){
-            curr.classList.add("absent");
-        }
-    })
-}
-
-function presnoclass(classn){
-    allbtns = document.querySelectorAll(".subject");
-    allbtns.forEach((curr)=>{
-        if(curr.classList[0]==classn){
-            curr.classList.add("presnoclass");
-        }
-    })
-}
-
-function notpresnoclass(classn){
-    allbtns = document.querySelectorAll(".subject");
-    allbtns.forEach((curr)=>{
-        if(curr.classList[0]==classn){
-            curr.classList.add("notpresnoclass");
-        }
-    })
-}
-

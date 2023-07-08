@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,41 @@
     <script defer src="deletedata.js"></script>
     <link rel="stylesheet" href="deletedata.css">
 </head>
+
 <body>
-    <div class="topnav">
-        <p class="text">ATTENDANCE APP</p>
-    </div>
-    <div class="currdate"><input type="date" id="currdate"></div><br>
-    <div id="msg" class="hide"></div>
-    <div class="row">
-    
-    
-        <div id="pres">
-            
+    <center>
+        <div class="topnav">
+            <p class="text">ATTENDANCE APP</p>
         </div>
-    
-        <div id="notpres">
-            
+        <div id="mainc">
+
+
+            <div class="currdate"><input type="date" id="currdate"></div><br>
+            <div id="msg" class="hide"></div>
+            <div class="row">
+
+
+                <div id="pres">
+
+                </div>
+
+                <div id="notpres">
+
+                </div>
+
+            </div>
+            <button onclick="showifpresent()" class="subbut" id="submitbutton">Submit</button><br>
+            <button onclick="deletebut()" class="subbut" id="deletebutton">Clear Data</button>
+            <div id="cleard"></div>
         </div>
-    
-    </div>
-    <center><button onclick="showifpresent()" class="subbut" id="submitbutton">Submit</button></center>
+        <footer id="footer">
+            <a href="secondpg.html" id="anch" class="record"><button class="btn">Update Attendance</button></a>
+            <a href="detaileddata.html" class="record"><button class="btn"> Attendance Record</button></a>
+            <a class="record"><button class="btn">Delete Attendance</button></a>
+        </footer>
+
+    </center>
+    <!--    <div id="tp"></div>-->
 </body>
+
 </html>

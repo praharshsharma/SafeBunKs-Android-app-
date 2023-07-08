@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #333;
+    color: white;
+}
+
+td{
+    width: 33%;
+    border: 1px solid black;
+    padding: 1%;
+}
+
+th{
+    width: 33%;
+    border: 1px solid black;
+    background-color: #333;
+    font-size: x-large;
+}
+
+
+
+table{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    background-color: white;
+    height: 8vh;
+}
+
+.record{
+    font-family: 'Acme', sans-serif;
+    background: none;
+    text-align: center;
+    height: 100%;
+    border: none;
+    width: 100%;
+    border-right: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.btn{
+    border: none;
+    background: none;
+
+}
+
+#mainc{
+    position: fixed;
+    top: 9vh;
+    width: 100%;
+    z-index: 1;
+    background-color: #333;
+}
+
+.topnav {
+    position: fixed;
+    top: 0;
+    background-color: #4169E1;
+    color: #333;
+    text-align: center;
+    z-index: 1;
+    width: 100%;
+    height: 9vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    padding: 5%;
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: 'Acme', sans-serif;
+    color: white;
+}
+
+#mainc2{
+    position: relative;
+    top: 14vh;
+    z-index: -1;
+    margin-bottom: 50%;
+}
+
+.date{
+    text-align: center;
+}
