@@ -15,10 +15,6 @@ subbut.addEventListener('click',()=>{
         submit.setAttribute("value","Submit");
         submit.setAttribute("onclick","addingsub()");
         subdiv.appendChild(submit);
-//        var chpg = document.createElement("input");
-//        chpg.setAttribute("type","submit");
-//        chpg.setAttribute("value","Edit your Attendance")
-//        anch.appendChild(chpg);
     }
     x=x+1;
     sublist.appendChild(subname);
