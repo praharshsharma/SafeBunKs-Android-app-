@@ -12,13 +12,9 @@ It is a scalable and feasible application that provides an interface for student
 
 # Languages Used
 - `HTML`
-  - Markup of UI
 - `CSS`
-  - Styling the UI
 - `JS`
-  - UI and data functionality
 - `JAVA`
-  - Storage of data and rendering of the website in Webview
 
 # Overview
 **Java** plays a crucial role in creating an Android web container with appropriate settings. It facilitates the establishment of a JavaScript interface and enables the storage of attendance records in data.json and detailedData.json files. Furthermore, Java facilitates the communication of data to JavaScript for further processing.
