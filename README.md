@@ -27,3 +27,6 @@ The **JavaScript** code handles user input, specifically the number of classes a
 
 The website's **Markup** is well-structured and optimized, with carefully chosen class and ID names that provide clear indications of their content. The responsive design ensures that the website adapts effectively to various screen sizes. Each component of the website is designed to match its intended functionality, creating a seamless user experience. Extensive research was conducted to select a theme that is visually appealing and easy on the eyes, enhancing the overall appeal of the application.
 
+<img src="app/src/main/assets/pg5.jpg" width="190"> <img src="app/src/main/assets/pg2.jpg" width="190">  <img src="app/src/main/assets/pg1.jpg" width="190"> 
+<img src="app/src/main/assets/pg3.jpg" width="190">  <img src="app/src/main/assets/pg4.jpg" width="190"> 
+
