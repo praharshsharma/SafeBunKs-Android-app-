@@ -24,20 +24,39 @@ subbut.addEventListener('click',()=>{
     sublist.appendChild(subname);
 })
 
-function addingsub(){
+let checkinjsondata = (name,arr)=>{
+    for(let i=0;i<arr.length;i++)
+    {
+        if(arr[i].name.replaceAll(' ','') == name.replaceAll(' ','')) return false;
+    }
+
+    return true;
+}
+
+async function  addingsub(){
     console.log("in submit button");
     let data = Android.load_data();
     let jsondata = [];
     if(data) jsondata = JSON.parse(data);
-
+    let st = "";
     for(let i=1;i<x;i++){
         var subn = document.getElementById(`sub${i}`).value;
+        subn = subn.trim();
         if(subn != "")
         {
-            var obj={name:subn , val:[0,0]};
-            jsondata.push(obj);
+            if(checkinjsondata(subn,jsondata))
+            {
+                var obj={name:subn , val:[0,0]};
+                jsondata.push(obj);
+            }
+            else
+            {
+                st = "Duplicate names not allowed";
+            }
         }
     }
+
+    if(st!="") Android.displayToast(st);
     let result = Android.add_data(JSON.stringify(jsondata));
     x=1;
     window.location.reload();

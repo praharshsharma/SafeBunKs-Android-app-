@@ -1,8 +1,15 @@
 let pres = document.getElementById("pres");
 let notpres = document.getElementById("notpres");
 let currDate = document.getElementById("currdate");
-var today = new Date().toISOString().split('T')[0];
-currDate.value = today;
+//var today = new Date().toISOString().split('T')[0];
+
+var today = new Date().toLocaleDateString();
+
+const parts = today.split("/");
+const formattedDate = `${parts[2]}-${parts[0].padStart(2, "0")}-${parts[1].padStart(2, "0")}`;
+
+currDate.value = formattedDate;
+
 //let myarr=[{name:"OOT",val:[0,0]},{name:"ojk",val:[0,0]},{name:"hghfty",val:[0,0]}];
 let myarr=[];
 let detailedDataArr = [];

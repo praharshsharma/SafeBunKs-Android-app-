@@ -1,3 +1,4 @@
+
 window.onload = async function () {
   let data = Android.load_detailed_data();
   let dataarr = [];
@@ -28,30 +29,36 @@ let display = async (dataarr) => {
     td1.classList.add("date");
     let td2 = document.createElement("td");
     let td3 = document.createElement("td");
-    td1.innerText = currElement.date;
+
 
     let presarr = currElement.presarr;
-    let st = "";
-    presarr.forEach((curr)=>{
-        st += curr;
-        st += ", ";
-    })
-    st = st.substring(0, st.length-2);
-    td2.innerText = st;
-
     let notpresarr = currElement.notpresarr;
-    st = "";
-    notpresarr.forEach((curr)=>{
-        st += curr;
-        st += ", ";
-    })
-    st = st.substring(0, st.length-2);
-    td3.innerText = st;
 
-    row.appendChild(td1);
-    row.appendChild(td2);
-    row.appendChild(td3);
-    table.appendChild(row);
+    if((JSON.stringify(presarr))!="[]" || (JSON.stringify(notpresarr))!="[]"){
+        td1.innerText = currElement.date;
+        let st = "";
+            presarr.forEach((curr)=>{
+                st += curr;
+                st += ", ";
+            })
+            st = st.substring(0, st.length-2);
+            td2.innerText = st;
+
+
+            st = "";
+            notpresarr.forEach((curr)=>{
+                st += curr;
+                st += ", ";
+            })
+            st = st.substring(0, st.length-2);
+            td3.innerText = st;
+
+            row.appendChild(td1);
+            row.appendChild(td2);
+            row.appendChild(td3);
+            table.appendChild(row);
+    }
+
   });
 };
 
